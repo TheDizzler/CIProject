@@ -21,7 +21,7 @@ public class SkillCardController : MonoBehaviour, UnityEngine.EventSystems.IPoin
 	private Image cardBG;
 	private Color cardColor;
 	public Color cardSelectColor;
-
+	public bool selected = false;
 
 
 	void Start () {
@@ -47,11 +47,15 @@ public class SkillCardController : MonoBehaviour, UnityEngine.EventSystems.IPoin
 
 
 	public void OnPointerDown(PointerEventData eventData) {
+		if (selected)
+			return;
+		selected = true;
 		cardBG.color = cardSelectColor;
 		battleMan.cardSelected(skill);
 	}
 
 	public void deselect() {
 		cardBG.color = cardColor;
+		selected = false;
 	}
 }

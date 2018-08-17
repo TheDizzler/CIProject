@@ -14,6 +14,7 @@ public class Skill {
 	public Drive drive;
 	public Alignment alignment;
 	public Sprite idolProfile;
+	
 
 
 	public Skill(IdolStateMachine idl, ActionType type, Drive drv, Alignment align, Sprite idolPic) {

@@ -20,13 +20,10 @@ public class BaseCrowdMember : MonoBehaviour {
 	protected Sprite[] bodySprites;
 	protected Sprite[] headSprites;
 	protected Sprite[] moodSprites;
+	protected Sprite[] handObjectSprites;
 
 	protected Transform head, body, armLeft, armRight, hand, mood;
 
-	/// <summary>
-	/// Object being held in hand.
-	/// </summary>
-	public Sprite objectSprite;
 
 
 	public Skill.Alignment baseAlignment;

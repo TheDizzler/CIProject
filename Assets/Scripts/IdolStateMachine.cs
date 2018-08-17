@@ -130,10 +130,10 @@ public class IdolStateMachine : BaseIdol {
 
 
 	float actionTime = 0;
-	float timeToPerformAction = .5f;
+	float timeToPerformAction = .25f;
 	bool reverse = false;
 	private int cycleCount = 0;
-	private int maxCycles = 5;
+	private int maxCycles = 3;
 	private bool dance() {
 
 		if (actionTime <= 0) {

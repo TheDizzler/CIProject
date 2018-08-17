@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class BattleController : MonoBehaviour {
 
-	private enum BattleState { STARTING, WAITING, PLAYER_SELECTING_ACTIONS, PERFORMING_ACTIONS }
+	private enum BattleState { STARTING, WAITING, PLAYER_SELECTING_ACTIONS, PERFORMING_ACTIONS, CROWD_ACTIONS }
 	BattleState currentState;
 
 	private const string backgroundLayer = "Background";
 
-	private List<IdolStateMachine> idols;
-	//private List<GameObject> positionHolders;
+	public static List<IdolStateMachine> idols;
+	
+	private GameObject currentSkillPanel;
+	private SkillCardController currentSkillCard;
 
 	/// <summary>
 	/// Randomly selected skill holders.
@@ -26,7 +28,7 @@ public class BattleController : MonoBehaviour {
 	/// </summary>
 	private List<Skill> selectedSkills = new List<Skill>();
 
-	private GameObject idolHUDPanel, skillHUDPanel, position1, position2, position3, enemyPosition1;
+	private GameObject idolHUDPanel, skillHUDPanel, position1, position2, position3;
 	private Vector3 originalHUDPos, hudOffscreenPos;
 
 	void Start() {
@@ -47,7 +49,9 @@ public class BattleController : MonoBehaviour {
 		skillCards[3] = GameObject.Find("SkillCard (3)").GetComponent<SkillCardController>();
 		skillCards[4] = GameObject.Find("SkillCard (4)").GetComponent<SkillCardController>();
 
-
+		currentSkillPanel = GameObject.Find("CurrentSkill");
+		currentSkillPanel.SetActive(false);
+		currentSkillCard = currentSkillPanel.GetComponentInChildren<SkillCardController>();
 
 		position1 = GameObject.Find("position1");
 		position1.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = backgroundLayer;
@@ -56,8 +60,7 @@ public class BattleController : MonoBehaviour {
 		position3 = GameObject.Find("position3");
 		position3.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = backgroundLayer;
 
-		enemyPosition1 = GameObject.Find("enemyPosition1");
-		enemyPosition1.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = backgroundLayer;
+		
 
 
 		idols = new List<IdolStateMachine>();
@@ -170,13 +173,19 @@ public class BattleController : MonoBehaviour {
 					
 				if (currentActor.currentState != IdolStateMachine.IdolState.ACTION) {
 					if (nextActor < selectedSkills.Count) {
+						currentSkillCard.setSkill(selectedSkills[nextActor]);
 						currentActor = selectedSkills[nextActor++].readyPerformance();
 					} else {
+						currentSkillPanel.SetActive(false);
 						// Idols finished their actions
-						currentState = BattleState.WAITING;
+						currentState = BattleState.CROWD_ACTIONS;
 					}
-
 				}
+				break;
+			case BattleState.CROWD_ACTIONS:
+				CrowdStateMachine crowd = GameObject.Find("CrowdMember").GetComponent<CrowdStateMachine>();
+				crowd.startAction();
+				
 
 				break;
 
@@ -191,10 +200,9 @@ public class BattleController : MonoBehaviour {
 			selectedSkills.Add(skll);
 			if (selectedSkills.Count >= 3) {
 				currentState = BattleState.PERFORMING_ACTIONS;
-				//foreach (Skill skill in selectedSkills) {
-				//	skill.readyPerformance();
-				//}
 				nextActor = 0;
+				currentSkillPanel.SetActive(true);
+				currentSkillCard.setSkill(selectedSkills[nextActor]);
 				currentActor = selectedSkills[nextActor++].readyPerformance();
 			}
 		}
