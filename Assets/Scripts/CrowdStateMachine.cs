@@ -27,7 +27,7 @@ public class CrowdStateMachine : BaseCrowdMember {
 
 		head.GetComponent<SpriteRenderer>().sprite = headSprites[0];
 		body.GetComponent<SpriteRenderer>().sprite = bodySprites[1];
-		mood.GetComponent<SpriteRenderer>().sprite = moodSprites[(int)currentMood];
+		mood.GetComponent<SpriteRenderer>().sprite = moodSprites[(int)currentMood +1];
 		int randObj = UnityEngine.Random.Range(0, handObjectSprites.Length/* * 2*/);
 		if (randObj < handObjectSprites.Length)
 			hand.GetComponent<SpriteRenderer>().sprite = handObjectSprites[randObj];

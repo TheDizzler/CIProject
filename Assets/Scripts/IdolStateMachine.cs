@@ -161,4 +161,9 @@ public class IdolStateMachine : BaseIdol {
 		}
 		return false;
 	}
+
+
+	public float getWidth() {
+		return body.GetComponent<Renderer>().bounds.size.x;
+	}
 }

@@ -2,32 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrowdController : MonoBehaviour {
+public class CrowdController {
 
 	List<CrowdStateMachine> audience;
 
 	Vector3 firstPosition;
 	BaseVenue venue;
+	
 
-	void Start () {
+	public CrowdController() {
 		venue = GameObject.Find("Venue").GetComponent<BaseVenue>();
 		audience = new List<CrowdStateMachine>();
 
 		// generate audience: determine audience size by venue, popularity, ... ?
 		GameObject startObj = GameObject.Find("CrowdStartPosition");
-		startObj.GetComponent<SpriteRenderer>().sortingLayerName = "Background";
+		startObj.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = "Background";
 		firstPosition = startObj.transform.position;
-		position = firstPosition;
-		int crowdNum = Random.Range(1, venue.maxOccupancy);
-		for (int i = 0; i < crowdNum; ++i) {
+		Vector3 position = firstPosition;
+		int crowdNum = Random.Range(5, venue.maxOccupancy);
+		int cols = 1;
+		for (int i = 0; i < 6; ++i) {
 			GameObject audMember = (GameObject)UnityEditor.AssetDatabase.LoadAssetAtPath<Object>(
 				"Assets/Prefabs/CrowdMember.prefab");
-			GameObject clone = GameObject.Instantiate(audMember, position.transform.position, idol.transform.rotation);
-			IdolStateMachine ism = clone.GetComponent<IdolStateMachine>();
+			GameObject clone = GameObject.Instantiate(audMember/*, position, audMember.transform.rotation*/);
+			clone.transform.position = position;
+			CrowdStateMachine csm = clone.GetComponent<CrowdStateMachine>();
+			audience.Add(csm);
+			position.y += .5f;
+			position.x += .2f;
+			position.z += .11f;
+			if (position.y > -.66) {
+				position = firstPosition;
+				position.x = firstPosition.x + (1) * cols++;
+			}
 		}
 	}
 
-	void Update () {
+	public void update () {
 		
 	}
 }

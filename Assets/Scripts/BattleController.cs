@@ -8,10 +8,13 @@ public class BattleController : MonoBehaviour {
 	private enum BattleState { STARTING, WAITING, PLAYER_SELECTING_ACTIONS, PERFORMING_ACTIONS, CROWD_ACTIONS }
 	BattleState currentState;
 
+	private List<Song> songList;
+
 	private const string backgroundLayer = "Background";
 
 	public static List<IdolStateMachine> idols;
-	
+	private CrowdController crowdMan;
+
 	private GameObject currentSkillPanel;
 	private SkillCardController currentSkillCard;
 
@@ -60,7 +63,6 @@ public class BattleController : MonoBehaviour {
 		position3 = GameObject.Find("position3");
 		position3.gameObject.GetComponent<SpriteRenderer>().sortingLayerName = backgroundLayer;
 
-		
 
 
 		idols = new List<IdolStateMachine>();
@@ -89,6 +91,8 @@ public class BattleController : MonoBehaviour {
 		idols.Add(ism);
 
 		currentState = BattleState.STARTING;
+
+		crowdMan = new CrowdController();
 
 
 	}
@@ -183,9 +187,9 @@ public class BattleController : MonoBehaviour {
 				}
 				break;
 			case BattleState.CROWD_ACTIONS:
-				CrowdStateMachine crowd = GameObject.Find("CrowdMember").GetComponent<CrowdStateMachine>();
-				crowd.startAction();
-				
+				//CrowdStateMachine crowd = GameObject.Find("CrowdMember").GetComponent<CrowdStateMachine>();
+				//crowd.startAction();
+				crowdMan.update();
 
 				break;
 

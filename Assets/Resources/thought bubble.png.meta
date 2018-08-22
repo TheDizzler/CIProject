@@ -2,9 +2,9 @@ fileFormatVersion: 2
 guid: ed3e75c01039e6b4a855340fc41bb221
 TextureImporter:
   fileIDToRecycleName:
-    21300000: thought bubble_0
-    21300002: thought bubble_1
-    21300004: thought bubble_2
+    21300000: ThoughtBubble_0
+    21300002: ThoughtBubble_1
+    21300004: ThoughtBubble_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -109,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: thought bubble_0
+      name: ThoughtBubble_0
       rect:
         serializedVersion: 2
         x: 0
@@ -117,7 +117,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -129,7 +129,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thought bubble_1
+      name: ThoughtBubble_1
       rect:
         serializedVersion: 2
         x: 64
@@ -137,7 +137,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,7 +149,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: thought bubble_2
+      name: ThoughtBubble_2
       rect:
         serializedVersion: 2
         x: 128
@@ -157,7 +157,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
